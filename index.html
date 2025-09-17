@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>fellatio.me</title>
+    <meta name="description" content="Modern web experience showcasing digital content">
+    
+    <!-- Open Graph tags -->
+    <meta property="og:title" content="fellatio.me">
+    <meta property="og:description" content="Modern web experience showcasing digital content">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://fellatio.me">
+    
+    <!-- Twitter Card tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="fellatio.me">
+    <meta name="twitter:description" content="Modern web experience showcasing digital content">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎭</text></svg>">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        
+        .container {
+            max-width: 1200px;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .header {
+            margin-bottom: 3rem;
+        }
+        
+        .title {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #fff, #e0e0e0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+        
+        .content-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .media-container {
+            position: relative;
+            max-width: 100%;
+            margin: 0 auto;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        
+        .media-item {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+        
+        .media-item:hover {
+            transform: scale(1.02);
+        }
+        
+        .controls {
+            margin-top: 1.5rem;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            backdrop-filter: blur(10px);
+        }
+        
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .loading {
+            display: none;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .spinner {
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 3px solid white;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .content-section {
+                padding: 1.5rem;
+            }
+            
+            .controls {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="title">fellatio.me</h1>
+            <p class="subtitle">A modern digital experience</p>
+        </header>
+        
+        <main>
+            <section class="content-section">
+                <div class="media-container">
+                    <img 
+                        id="mainMedia" 
+                        class="media-item" 
+                        src="IMG_0751.gif" 
+                        alt="Digital content showcase"
+                        loading="lazy"
+                    />
+                </div>
+                
+                <div class="controls">
+                    <button class="btn" onclick="togglePlayPause()">⏯️ Toggle</button>
+                    <button class="btn" onclick="loadCloudinaryAsset()">☁️ Load Cloud Asset</button>
+                    <a href="IMG_0751.gif" class="btn" download>⬇️ Download</a>
+                </div>
+            </section>
+            
+            <div class="loading" id="loadingIndicator">
+                <div class="spinner"></div>
+                <p>Loading cloud asset...</p>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Media control functionality
+        let isPlaying = true;
+        
+        function togglePlayPause() {
+            const media = document.getElementById('mainMedia');
+            
+            if (media.tagName === 'IMG') {
+                // For GIFs, we can't truly pause, but we can reload to restart
+                if (isPlaying) {
+                    // Store current src and clear it to "pause"
+                    media.dataset.originalSrc = media.src;
+                    media.src = '';
+                    isPlaying = false;
+                } else {
+                    // Restore src to "play"
+                    media.src = media.dataset.originalSrc;
+                    isPlaying = true;
+                }
+            } else if (media.tagName === 'VIDEO') {
+                if (isPlaying) {
+                    media.pause();
+                    isPlaying = false;
+                } else {
+                    media.play();
+                    isPlaying = true;
+                }
+            }
+        }
+        
+        async function loadCloudinaryAsset() {
+            const loadingIndicator = document.getElementById('loadingIndicator');
+            const mainMedia = document.getElementById('mainMedia');
+            
+            loadingIndicator.style.display = 'block';
+            
+            try {
+                // Try to load the Cloudinary asset
+                const cloudinaryUrl = 'https://asset.cloudinary.com/drxewzlaa/0cb0b0e8ecce4d6f1d91fc4b34d821dc';
+                
+                // Create a new image element to test loading
+                const testImg = new Image();
+                testImg.crossOrigin = 'anonymous';
+                
+                testImg.onload = function() {
+                    mainMedia.src = cloudinaryUrl;
+                    loadingIndicator.style.display = 'none';
+                };
+                
+                testImg.onerror = function() {
+                    // If direct loading fails, try to extract asset from the sharing page
+                    fetch(cloudinaryUrl)
+                        .then(response => response.text())
+                        .then(html => {
+                            // Try to extract actual media URLs from the HTML
+                            const parser = new DOMParser();
+                            const doc = parser.parseFromString(html, 'text/html');
+                            
+                            // Look for img elements or data attributes that might contain the real asset URL
+                            const possibleUrls = html.match(/https:\/\/res\.cloudinary\.com\/[^"'\s]+/g);
+                            
+                            if (possibleUrls && possibleUrls.length > 0) {
+                                // Try the first non-logo URL
+                                const assetUrl = possibleUrls.find(url => !url.includes('cloudinary_cloud_glyph'));
+                                if (assetUrl) {
+                                    mainMedia.src = assetUrl;
+                                } else {
+                                    throw new Error('No suitable asset found');
+                                }
+                            } else {
+                                throw new Error('No asset URLs found');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error loading Cloudinary asset:', error);
+                            alert('Could not load cloud asset. The sharing link may require direct browser access.');
+                        })
+                        .finally(() => {
+                            loadingIndicator.style.display = 'none';
+                        });
+                };
+                
+                testImg.src = cloudinaryUrl;
+                
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Could not load cloud asset. Please check the URL.');
+                loadingIndicator.style.display = 'none';
+            }
+        }
+        
+        // Preload the main image
+        window.addEventListener('load', function() {
+            const mainMedia = document.getElementById('mainMedia');
+            if (mainMedia.complete) {
+                // Image is already loaded
+                console.log('Media loaded successfully');
+            } else {
+                mainMedia.addEventListener('load', function() {
+                    console.log('Media loaded successfully');
+                });
+                mainMedia.addEventListener('error', function() {
+                    console.error('Error loading main media');
+                    mainMedia.alt = 'Content could not be loaded';
+                });
+            }
+        });
+        
+        // Add keyboard controls
+        document.addEventListener('keydown', function(e) {
+            switch(e.code) {
+                case 'Space':
+                    e.preventDefault();
+                    togglePlayPause();
+                    break;
+                case 'KeyC':
+                    if (e.ctrlKey || e.metaKey) return; // Don't interfere with copy
+                    loadCloudinaryAsset();
+                    break;
+            }
+        });
+    </script>
+</body>
+</html>
