@@ -135,93 +135,94 @@
             z-index: 10;
         }
 
-        .corner-links {
+        .bottom-links {
             position: fixed;
-            top: 20px;
-            right: 20px;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
             z-index: 20;
-            opacity: 0.3;
+            display: flex;
+            gap: 30px;
+            opacity: 0.4;
             transition: opacity 0.3s ease;
         }
 
-        .corner-links:hover {
+        .bottom-links:hover {
             opacity: 1;
         }
 
-        .corner-link {
-            display: block;
+        .bottom-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             color: #ffffff;
             text-decoration: none;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             font-weight: 300;
-            letter-spacing: 0.5px;
-            margin-bottom: 8px;
-            padding: 4px 8px;
-            border-radius: 2px;
+            padding: 8px 12px;
+            border-radius: 8px;
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
             transition: all 0.3s ease;
-            text-align: right;
+            min-width: 80px;
         }
 
-        .corner-link:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateX(-2px);
+        .bottom-link:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-3px);
             color: #f0f0f0;
         }
 
-        .link-label {
-            font-size: 0.6rem;
-            opacity: 0.7;
-            display: block;
-            margin-bottom: 2px;
+        .link-icon {
+            font-size: 1.5rem;
+            margin-bottom: 4px;
+        }
+
+        .link-text {
+            font-size: 0.7rem;
+            opacity: 0.9;
         }
 
         @media (max-width: 768px) {
-            .text-overlay {
-                font-size: 1.5rem;
-                bottom: 10px;
+            .bottom-links {
+                bottom: 20px;
+                gap: 20px;
             }
 
-            .corner-links {
-                top: 15px;
-                right: 15px;
+            .bottom-link {
+                font-size: 0.7rem;
+                padding: 6px 10px;
+                min-width: 70px;
             }
 
-            .corner-link {
+            .link-icon {
+                font-size: 1.3rem;
+            }
+
+            .link-text {
                 font-size: 0.65rem;
-                padding: 3px 6px;
-            }
-
-            .link-label {
-                font-size: 0.55rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="corner-links">
-        <a href="https://rickithadi.dev" class="corner-link" rel="noopener" target="_blank">
-            <span class="link-label">more serious endeavors</span>
-            rickithadi.dev
-        </a>
-        <a href="https://canhadi.surf" class="corner-link" rel="noopener" target="_blank">
-            <span class="link-label">recreational pursuits</span>
-            canhadi.surf
-        </a>
-    </div>
-
     <div class="container">
         <div class="gif-container">
-            <img src="IMG_0751.gif" alt="fellatio.me satirical digital art experience" class="main-gif" onerror="this.style.display='none'; document.querySelector('.text-overlay').style.display='block';">
-            <div class="text-overlay" style="display: block;">
-                <h1>fellatio.me</h1>
-                <p style="font-size: 1rem; font-weight: normal; margin-top: 10px; opacity: 0.8;">
-                    A Satirical Digital Experience
-                </p>
-            </div>
+            <img src="IMG_0751.gif" alt="fellatio.me satirical digital art experience" class="main-gif">
         </div>
+    </div>
+
+    <div class="bottom-links">
+        <a href="https://rickithadi.dev" class="bottom-link" rel="noopener" target="_blank">
+            <div class="link-icon">💻</div>
+            <div class="link-text">rickithadi.dev</div>
+        </a>
+        <a href="https://canhadi.surf" class="bottom-link" rel="noopener" target="_blank">
+            <div class="link-icon">🏄</div>
+            <div class="link-text">canhadi.surf</div>
+        </a>
+    </div>
         
         <!-- Hidden SEO Content -->
         <div style="position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden;">
