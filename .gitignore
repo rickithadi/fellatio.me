@@ -54,9 +54,9 @@ Thumbs.db
 *.temp
 cloudinary_asset.html
 
-# Large media files
-*.gif
-IMG_*
+# Large media files (allow specific GIFs for the site)
+# *.gif - commented out to allow site GIFs
+# IMG_* - commented out to allow IMG_0751.gif
 
 # Claude session data
 .claude/
